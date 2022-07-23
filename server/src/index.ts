@@ -10,7 +10,7 @@ import session from 'express-session'
 import connectRedis from 'connect-redis'
 import cors from "cors"
 import { COOKIE, __prod__ } from "./constants/constants"
-import { connection } from "./utils/dataSource"
+import { connection } from "./database/dataSource"
 
 const PORT = process.env.PORT || 4000
 

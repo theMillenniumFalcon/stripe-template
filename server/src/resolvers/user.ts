@@ -7,7 +7,7 @@ import { UserResponse } from "../responses/UserResponse"
 import argon2 from 'argon2'
 import { COOKIE } from "../constants/constants";
 import { FindOneOptions } from "typeorm"
-import { connection } from "../utils/dataSource"
+import { connection } from "../database/dataSource"
 
 @Resolver(User)
 export class UserResolver {

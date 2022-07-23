@@ -6,6 +6,7 @@ import InputForm from '../components/InputForm'
 // import { useRegisterMutation } from '../generated/graphql'
 // import { Errors } from '../utils/Errors'
 import NextLink from 'next/link'
+import { Wrapper } from '../components/Wrapper'
 
 interface registerProps { }
 
@@ -14,37 +15,38 @@ const Login: React.FC<registerProps> = ({ }) => {
     //   const [, register] = useRegisterMutation()
 
     return (
-        <Formik initialValues={{ email: "", password: "" }} onSubmit={async (values, { setErrors }) => {
-            //   const response = await register(values)
-            //   if (response.data?.register.errors) {
-            //     setErrors(Errors(response.data.register.errors))
-            //   } else if (response.data?.register.user) {
-            //     // * worked
-            //     router.push('/')
-            //   }
-            //   console.log(values)
-            //   return register(values)
-        }}>
-            {({ isSubmitting }) => (
-                <Box w="100%" p={7}>
-                    <Form>
-                        <Box mt={4}>
-                            <InputForm name="email" placeholder="email" label="Email" />
-                        </Box>
-                        <Box mt={4}>
-                            <InputForm name="password" placeholder="password" label="Password" type="password" />
-                        </Box>
-                        <Flex mt={4}>
-                            <Button type='submit' colorScheme='red' isLoading={isSubmitting}>Login</Button>
-                            <NextLink href="/register">
-                                <Link ml='auto'>Create a new account</Link>
-                            </NextLink>
-                        </Flex>
-                    </Form>
-                </Box>
-            )}
-        </Formik >
-
+        <Wrapper variant='regular'>
+            <Formik initialValues={{ email: "", password: "" }} onSubmit={async (values, { setErrors }) => {
+                //   const response = await register(values)
+                //   if (response.data?.register.errors) {
+                //     setErrors(Errors(response.data.register.errors))
+                //   } else if (response.data?.register.user) {
+                //     // * worked
+                //     router.push('/')
+                //   }
+                //   console.log(values)
+                //   return register(values)
+            }}>
+                {({ isSubmitting }) => (
+                    <Box w="100%" p={7}>
+                        <Form>
+                            <Box mt={4}>
+                                <InputForm name="email" placeholder="email" label="Email" />
+                            </Box>
+                            <Box mt={4}>
+                                <InputForm name="password" placeholder="password" label="Password" type="password" />
+                            </Box>
+                            <Flex mt={4}>
+                                <Button type='submit' colorScheme='red' isLoading={isSubmitting}>Login</Button>
+                                <NextLink href="/register">
+                                    <Link ml='auto'>Create a new account</Link>
+                                </NextLink>
+                            </Flex>
+                        </Form>
+                    </Box>
+                )}
+            </Formik>
+        </Wrapper>
     )
 }
 
