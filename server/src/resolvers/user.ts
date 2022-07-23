@@ -111,7 +111,7 @@ export class UserResolver {
         @Arg('options') options: UserLoginInput,
         @Ctx() { req }: Context
     ): Promise<UserResponse> {
-        const user = await User.findOne({ username: options.username })
+        const user = await User.findOneBy({ username: options.username })
         if (!user) {
             return {
                 errors: [{

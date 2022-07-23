@@ -9,7 +9,7 @@
     "watch": "tsc -w",
     "dev": "nodemon dist/index.js",
     "start": "node dist/index.js",
-    "generate": "ts-node ../../node_modules/typeorm/cli.js migration:generate -n Migrations -c -d './utils/data-source.ts' development -p"
+    "generate": "npx typeorm-ts-node-commonjs schema:sync -d src/utils/dataSource.ts"
   },
   "keywords": [],
   "author": "",

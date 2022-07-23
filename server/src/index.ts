@@ -18,8 +18,6 @@ const main = async () => {
 
     await connection.initialize()
 
-    // await User.delete({})
-
     const app = express()
 
     const RedisStore = connectRedis(session)
@@ -30,8 +28,7 @@ const main = async () => {
     app.use(cors({
         origin: process.env.CORS_ORIGIN,
         credentials: true,
-    })
-    )
+    }))
 
     app.use(session({
         name: COOKIE,
@@ -53,7 +50,7 @@ const main = async () => {
     app.get('/', (_, res) => {
         res.send("Server is working fine!")
     })
-    console.log('My connection',connection)
+    console.log('My connection', connection)
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
