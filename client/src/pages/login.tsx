@@ -3,35 +3,38 @@ import { Formik, Form } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import InputForm from '../components/InputForm'
-// import { useRegisterMutation } from '../generated/graphql'
-// import { Errors } from '../utils/Errors'
+import { Errors } from '../utils/Errors'
 import NextLink from 'next/link'
 import { Wrapper } from '../components/Wrapper'
+import { useLoginMutation } from '../generated/graphql'
 
 interface registerProps { }
 
 const Login: React.FC<registerProps> = ({ }) => {
     const router = useRouter()
-    //   const [, register] = useRegisterMutation()
+    const [login] = useLoginMutation()
 
     return (
         <Wrapper variant='regular'>
-            <Formik initialValues={{ email: "", password: "" }} onSubmit={async (values, { setErrors }) => {
-                //   const response = await register(values)
-                //   if (response.data?.register.errors) {
-                //     setErrors(Errors(response.data.register.errors))
-                //   } else if (response.data?.register.user) {
-                //     // * worked
-                //     router.push('/')
-                //   }
-                //   console.log(values)
-                //   return register(values)
+            <Formik initialValues={{ username: "", password: "" }} onSubmit={async (values, { setErrors }) => {
+                const response = await login({
+                    variables: values
+                })
+                if (response.data?.login.errors) {
+                    setErrors(Errors(response.data.login.errors))
+                } else if (response.data?.login.user) {
+                    router.push('/')
+                }
+                console.log(values)
+                return login({
+                    variables: values
+                })
             }}>
                 {({ isSubmitting }) => (
                     <Box w="100%" p={7}>
                         <Form>
                             <Box mt={4}>
-                                <InputForm name="email" placeholder="email" label="Email" />
+                                <InputForm name="username" placeholder="username" label="Username" />
                             </Box>
                             <Box mt={4}>
                                 <InputForm name="password" placeholder="password" label="Password" type="password" />

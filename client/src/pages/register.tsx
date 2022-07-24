@@ -3,29 +3,32 @@ import { Formik, Form } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import InputForm from '../components/InputForm'
-// import { useRegisterMutation } from '../generated/graphql'
-// import { Errors } from '../utils/Errors'
+import { Errors } from '../utils/Errors'
 import NextLink from 'next/link'
 import { Wrapper } from '../components/Wrapper'
+import { useRegisterMutation } from '../generated/graphql'
 
 interface registerProps { }
 
 const Register: React.FC<registerProps> = ({ }) => {
     const router = useRouter()
-    //   const [, register] = useRegisterMutation()
+    const [register] = useRegisterMutation()
 
     return (
         <Wrapper variant='regular'>
             <Formik initialValues={{ username: "", email: "", password: "" }} onSubmit={async (values, { setErrors }) => {
-                //   const response = await register(values)
-                //   if (response.data?.register.errors) {
-                //     setErrors(Errors(response.data.register.errors))
-                //   } else if (response.data?.register.user) {
-                //     // * worked
-                //     router.push('/')
-                //   }
-                //   console.log(values)
-                //   return register(values)
+                const response = await register({
+                    variables: values
+                })
+                if (response.data?.register.errors) {
+                    setErrors(Errors(response.data.register.errors))
+                } else if (response.data?.register.user) {
+                    router.push('/')
+                }
+                console.log(values)
+                return register({
+                    variables: values
+                })
             }}>
                 {({ isSubmitting }) => (
                     <Box w="100%" p={7}>

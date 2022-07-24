@@ -122,6 +122,11 @@ export type TestQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TestQuery = { __typename?: 'Query', test: string };
 
+export type UserLoggedInQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserLoggedInQuery = { __typename?: 'Query', userLoggedIn?: { __typename?: 'User', id: number, username: string } | null };
+
 
 export const CreateSubscriptionDocument = gql`
     mutation CreateSubscription($source: String!) {
@@ -304,3 +309,38 @@ export function useTestLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TestQ
 export type TestQueryHookResult = ReturnType<typeof useTestQuery>;
 export type TestLazyQueryHookResult = ReturnType<typeof useTestLazyQuery>;
 export type TestQueryResult = Apollo.QueryResult<TestQuery, TestQueryVariables>;
+export const UserLoggedInDocument = gql`
+    query UserLoggedIn {
+  userLoggedIn {
+    id
+    username
+  }
+}
+    `;
+
+/**
+ * __useUserLoggedInQuery__
+ *
+ * To run a query within a React component, call `useUserLoggedInQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserLoggedInQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserLoggedInQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUserLoggedInQuery(baseOptions?: Apollo.QueryHookOptions<UserLoggedInQuery, UserLoggedInQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserLoggedInQuery, UserLoggedInQueryVariables>(UserLoggedInDocument, options);
+      }
+export function useUserLoggedInLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserLoggedInQuery, UserLoggedInQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserLoggedInQuery, UserLoggedInQueryVariables>(UserLoggedInDocument, options);
+        }
+export type UserLoggedInQueryHookResult = ReturnType<typeof useUserLoggedInQuery>;
+export type UserLoggedInLazyQueryHookResult = ReturnType<typeof useUserLoggedInLazyQuery>;
+export type UserLoggedInQueryResult = Apollo.QueryResult<UserLoggedInQuery, UserLoggedInQueryVariables>;

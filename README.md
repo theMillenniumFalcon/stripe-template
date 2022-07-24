@@ -29,6 +29,7 @@ REDIS_URL=
 PORT=
 SESSION_SECRET=
 CORS_ORIGIN=
+STRIPE_KEY=
 ```
 
 ## Installation
