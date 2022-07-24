@@ -11,6 +11,8 @@ import connectRedis from 'connect-redis'
 import cors from "cors"
 import { COOKIE, __prod__ } from "./constants/constants"
 import { connection } from "./database/dataSource"
+import { UserResolver } from "./resolvers/user"
+import { StripeResolver } from "./resolvers/stripe"
 
 const PORT = process.env.PORT || 4000
 
@@ -54,7 +56,7 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [TestResolver],
+            resolvers: [TestResolver, UserResolver, StripeResolver],
             validate: false
         }),
         context: ({ req, res }) => ({ req, res, redis }),

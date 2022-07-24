@@ -1,0 +1,10 @@
+mutation CreateSubscription($source: String!) {
+    createSubscription(
+      options: { source: $source }
+    ) {
+      errors {
+        field
+        message
+      }
+    }
+  }
