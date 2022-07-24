@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       Hello {' '}
-      <NextLink href="/stripe">
+      <NextLink href="/checkout">
         <Button as={Link}>
           Stripe
         </Button>

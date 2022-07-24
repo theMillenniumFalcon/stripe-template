@@ -27,6 +27,7 @@
     "ioredis": "^5.2.1",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
+    "stripe": "^9.14.0",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.3.7"
   },

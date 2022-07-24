@@ -6,6 +6,7 @@ declare global {
       DATABASE_PORT: string;
       SESSION_SECRET: string;
       CORS_ORIGIN: string;
+      STRIPE_KEY: string;
     }
   }
 }

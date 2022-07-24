@@ -1,6 +1,4 @@
-import { CheckoutForm } from '../components/checkoutform'
 import { useState } from 'react'
-import { Wrapper } from '../components/Wrapper'
 import { loadStripe, Stripe } from '@stripe/stripe-js'
 import { Button, Link } from '@chakra-ui/react'
 import { baseURL } from '../constants'
@@ -17,7 +15,7 @@ const getStripe = () => {
     return stripePromise
 }
 
-const Stripe: React.FC<stripeProps> = ({ }) => {
+export const StripeCheckout: React.FC<stripeProps> = ({ }) => {
     const [stripeError, setStripeError] = useState<null | string>(null)
     const [isLoading, setIsLoading] = useState(false)
     const item = {
@@ -45,12 +43,8 @@ const Stripe: React.FC<stripeProps> = ({ }) => {
         setIsLoading(false)
     }
     return (
-        <Wrapper>
-            <Button as={Link} mr={4} onClick={redirectToCheckout} disabled={isLoading}>
-                {isLoading ? "Loading..." : 'Checkout'}
-            </Button>
-        </Wrapper>
+        <Button as={Link} mr={4} onClick={redirectToCheckout} disabled={isLoading}>
+            {isLoading ? "Loading..." : 'Checkout'}
+        </Button>
     )
 }
-
-export default Stripe

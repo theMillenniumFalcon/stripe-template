@@ -1,6 +1,0 @@
-query UserLoggedIn {
-  userLoggedIn {
-    id
-    username
-  }
-}

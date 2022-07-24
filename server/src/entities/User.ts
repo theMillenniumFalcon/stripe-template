@@ -19,6 +19,14 @@ export class User extends BaseEntity {
     @Column()
     password!: string;
 
+    @Field()
+    @Column({ nullable: true })
+    stripeId: string;
+
+    @Field()
+    @Column({ default: "free-trial" })
+    type: string;
+
     @Field(() => String)
     @CreateDateColumn()
     createdAt: Date;
