@@ -35,7 +35,6 @@ export const StripeCheckout: React.FC<stripeProps> = ({ }) => {
         console.log("Redirect to checkout")
         const stripe = await getStripe()
         const { error } = await stripe!.redirectToCheckout(checkoutOptions as any)
-        console.log("Stripe checkout error", error)
 
         if (error) {
             setStripeError(error.message as string)
@@ -43,7 +42,7 @@ export const StripeCheckout: React.FC<stripeProps> = ({ }) => {
         setIsLoading(false)
     }
     return (
-        <Button as={Link} mr={4} onClick={redirectToCheckout} disabled={isLoading}>
+        <Button onClick={redirectToCheckout} disabled={isLoading}>
             {isLoading ? "Loading..." : 'Checkout'}
         </Button>
     )
