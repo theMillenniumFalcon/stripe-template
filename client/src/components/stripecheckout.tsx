@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { loadStripe, Stripe } from '@stripe/stripe-js'
-import { Button, Link } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import { baseURL } from '../constants'
 
 interface stripeProps { }

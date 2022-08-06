@@ -3,10 +3,14 @@ import { Layout } from '../components/Layout'
 import { Text, Flex, Box, Switch, Heading } from "@chakra-ui/react"
 import { StripeCheckout } from '../components/stripecheckout'
 import { useState } from 'react'
+import { useCreateSubscriptionMutation } from '../generated/graphql'
 
 const Home: NextPage = () => {
   const [check, setCheck] = useState(false)
+  const [create] = useCreateSubscriptionMutation()
+  
   const toggleChecked = () => setCheck(value => !value)
+
   return (
     <Layout>
       <Text>Upgrade to paid plan to access all the features</Text>

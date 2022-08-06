@@ -10,7 +10,7 @@ export const Navbar: React.FC<NavbarProps> = ({ }) => {
   const [logout, { loading: logoutFetching }] = useLogoutMutation()
   const apolloClient = useApolloClient()
   const { data, loading } = useUserLoggedInQuery()
-  console.log(data)
+  console.log(data?.userLoggedIn)
 
   let body = null
 
