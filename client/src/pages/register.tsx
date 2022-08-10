@@ -6,7 +6,7 @@ import InputForm from '../components/InputForm'
 import { Errors } from '../utils/Errors'
 import NextLink from 'next/link'
 import { Wrapper } from '../components/Wrapper'
-import { useRegisterMutation } from '../generated/graphql'
+import { useRegisterMutation, UserLoggedInDocument, UserLoggedInQuery } from '../generated/graphql'
 
 interface registerProps { }
 
@@ -18,7 +18,16 @@ const Register: React.FC<registerProps> = ({ }) => {
         <Wrapper variant='regular'>
             <Formik initialValues={{ username: "", email: "", password: "" }} onSubmit={async (values, { setErrors }) => {
                 const response = await register({
-                    variables: values
+                    variables: values,
+                    update: (cache, { data }) => {
+                        cache.writeQuery<UserLoggedInQuery>({
+                            query: UserLoggedInDocument,
+                            data: {
+                                __typename: "Query",
+                                userLoggedIn: data?.register.user,
+                            },
+                        })
+                    },
                 })
                 if (response.data?.register.errors) {
                     setErrors(Errors(response.data.register.errors))

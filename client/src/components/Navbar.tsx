@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Link, Flex, Button, Heading } from "@chakra-ui/react"
+import { Box, Link, Flex, Button, Heading, Badge } from "@chakra-ui/react"
 import NextLink from "next/link"
 import { useUserLoggedInQuery, useLogoutMutation } from "../generated/graphql"
 import { useApolloClient } from "@apollo/client";
@@ -10,7 +10,7 @@ export const Navbar: React.FC<NavbarProps> = ({ }) => {
   const [logout, { loading: logoutFetching }] = useLogoutMutation()
   const apolloClient = useApolloClient()
   const { data, loading } = useUserLoggedInQuery()
-  console.log(data?.userLoggedIn)
+  console.log('UserLoggedIn:', data?.userLoggedIn)
 
   let body = null
 
@@ -36,14 +36,13 @@ export const Navbar: React.FC<NavbarProps> = ({ }) => {
   } else {
     body = (
       <Flex align="center">
-        <Box mr={2}>{data.userLoggedIn.username}</Box>
+        <Badge colorScheme='green' mr={5}>{data.userLoggedIn.username}</Badge>
         <Button
           onClick={async () => {
             await logout()
             await apolloClient.resetStore()
           }}
           isLoading={logoutFetching}
-          variant="link"
         >
           logout
         </Button>
