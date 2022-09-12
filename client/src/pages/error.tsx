@@ -3,12 +3,12 @@ import { Layout } from "../components/Layout"
 import { Button } from "@chakra-ui/react"
 import NextLink from "next/link"
 
-interface successProps { }
+interface errorProps { }
 
-const Success: React.FC<successProps> = ({ }) => {
+const Error: React.FC<errorProps> = ({ }) => {
     return (
         <Layout>
-            <Text>The transaction was successfull</Text>
+            <Text>Some error occurred on our side</Text>
             <Flex align="center" justify="center" mt={4}>
                 <NextLink href="/">
                     <Button>
@@ -20,4 +20,4 @@ const Success: React.FC<successProps> = ({ }) => {
     )
 }
 
-export default Success
+export default Error

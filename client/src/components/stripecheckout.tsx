@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { loadStripe, Stripe } from '@stripe/stripe-js'
 import { Button } from '@chakra-ui/react'
 import { baseURL } from '../constants'
+import { useRouter } from 'next/router'
 
 interface stripeProps { }
 
@@ -16,6 +17,7 @@ const getStripe = () => {
 }
 
 export const StripeCheckout: React.FC<stripeProps> = ({ }) => {
+    const router = useRouter()
     const [stripeError, setStripeError] = useState<null | string>(null)
     const [isLoading, setIsLoading] = useState(false)
     const item = {
@@ -34,11 +36,17 @@ export const StripeCheckout: React.FC<stripeProps> = ({ }) => {
         setIsLoading(true)
         console.log("Redirect to checkout")
         const stripe = await getStripe()
-        const { error } = await stripe!.redirectToCheckout(checkoutOptions as any)
-
-        if (error) {
-            setStripeError(error.message as string)
+        try {
+            await stripe!.redirectToCheckout(checkoutOptions as any)
+        } catch (error) {
+            console.log('My error is ', error)
+            router.push('/error')
         }
+
+        // if (error) {
+        //     setStripeError(error.message as string)
+        //     // console.log('My error is ', error.message)
+        // }
         setIsLoading(false)
     }
     return (
